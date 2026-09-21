@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival JAS - Sábado 16 de Enero 2027</title>
+    <style>
+        :root {
+            --primary-pink: #ff2a85;
+            --secondary-cyan: #00f0ff;
+            --accent-yellow: #ffea00;
+            --dark-bg: #12051f;
+            --card-bg: rgba(25, 10, 40, 0.9);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(rgba(18, 5, 31, 0.7), rgba(18, 5, 31, 0.9)), #12051f;
+        }
+
+        .top-badge {
+            background: var(--primary-pink);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .hero-content {
+            margin: auto 0;
+            max-width: 800px;
+        }
+
+        h1.main-title {
+            font-size: clamp(3.5rem, 10vw, 7.5rem);
+            color: #fff;
+            text-shadow: 0 0 20px var(--primary-pink), 0 0 40px var(--secondary-cyan);
+            margin: 1rem 0;
+            line-height: 1;
+            font-weight: 900;
+        }
+
+        .event-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            font-weight: bold;
+            color: var(--accent-yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-location {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-top: 0.8rem;
+            color: #e0e0e0;
+        }
+
+        .countdown-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--secondary-cyan);
+            padding: 10px 15px;
+            border-radius: 12px;
+            min-width: 75px;
+        }
+
+        .countdown-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary-cyan);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #ddd;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        section {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--secondary-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: rgba(18, 5, 31, 0.8);
+            border: 1px solid rgba(255, 42, 133, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .transfer-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255,42,133,0.1), rgba(0,240,255,0.1));
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px dashed var(--secondary-cyan);
+        }
+
+        .alias-display {
+            background: #000;
+            color: var(--accent-yellow);
+            font-size: 1.4rem;
+            font-weight: bold;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            letter-spacing: 2px;
+            border: 1px solid var(--accent-yellow);
+        }
+
+        .copy-btn {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .copy-btn:hover {
+            opacity: 0.9;
+        }
+
+        .form-section-intro {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #ddd;
+        }
+
+        .form-container {
+            background: rgba(15, 3, 25, 0.9);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--secondary-cyan);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        select.form-control option {
+            background: #1c092d;
+            color: #fff;
+        }
+
+        .submit-btn {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(0, 255, 128, 0.15);
+            border: 1px solid #00ff80;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            color: #00ff80;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #888;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer span {
+            color: var(--primary-pink);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="top-badge">¡Edición Verano 2027!</div>
+        
+        <div class="hero-content">
+            <p class="event-subtitle">Sábado 16 de Enero del 2027 • 10 a 22 hs</p>
+            <h1 class="main-title">Festival JAS</h1>
+            <p class="event-location">📍 Quinta La Morena, Guernica</p>
+            
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+        </div>
+        <div></div>
+    </header>
+
+    <div class="container">
+
+        <section>
+            <h2>Detalles del Festival</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>🏊‍♂️ Pileta & Full Day</h3>
+                    <p>Acceso total a la pileta, música al aire libre y un entorno natural inigualable durante 12 horas.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🚌 Traslado en Micro</h3>
+                    <p>Puntos de salida coordinados desde <strong>Lanús</strong> y <strong>Adrogué</strong> (Horarios a definir).</p>
+                </div>
+                <div class="info-card">
+                    <h3>🥗 Menú Opcional</h3>
+                    <p>Opciones gastronómicas adaptadas para celíacos, vegetarianos y veganos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="asistencia">
+            <h2>Confirmación de Asistencia</h2>
+            <p class="form-section-intro">Completá el formulario para registrar tus datos. La información se guardará automáticamente en nuestra planilla de Excel.</p>
+            
+            <div class="form-container">
+                <form id="festivalForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre y Apellido *</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ej. María Gómez" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="asistencia">¿Confirmás tu asistencia? *</label>
+                        <select id="asistencia" name="asistencia" class="form-control" required>
+                            <option value="">Seleccioná una opción</option>
+                            <option value="Sí, ¡allá estaré!">Sí, ¡allá estaré!</option>
+                            <option value="No puedo asistir">No puedo asistir</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="invitados">Cantidad de invitados adicionales</label>
+                        <input type="number" id="invitados" name="invitados" class="form-control" min="0" max="5" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="menu">Menú opcional</label>
+                        <select id="menu" name="menu" class="form-control">
+                            <option value="General">Menú General / Estándar</option>
+                            <option value="Celíaco">Celíaco (Sin TACC)</option>
+                            <option value="Vegetariano">Vegetariano</option>
+                            <option value="Vegano">Vegano</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="traslado">¿Deseás trasladarte en micro?</label>
+                        <select id="traslado" name="traslado" class="form-control">
+                            <option value="No">No necesito traslado</option>
+                            <option value="Sí - Salida Lanús">Sí - Salida desde Lanús</option>
+                            <option value="Sí - Salida Adrogué">Sí - Salida desde Adrogué</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">Enviar Confirmación</button>
+                </form>
+
+                <div id="successMessage" class="success-message">
+                    ✅ ¡Muchas gracias! Tus datos se registraron correctamente en la planilla. ¡Nos vemos en el Festival JAS!
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Colaboración / Entrada a la Gorra</h2>
+            <div class="transfer-box">
+                <p style="margin-bottom: 1rem; color: #ddd;">Si querés colaborar de forma anticipada mediante transferencia o Mercado Pago:</p>
+                <div class="alias-display">festivaljas</div>
+                <button class="copy-btn" onclick="copyAlias()">Copiar Alias</button>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Festival JAS 2027 • Quinta La Morena, Guernica</p>
+    </footer>
+
+    <script>
+        const eventDate = new Date('January 16, 2027 10:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) return;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        function copyAlias() {
+            navigator.clipboard.writeText('festivaljas');
+            alert('¡Alias copiado al portapapeles: festivaljas!');
+        }
+
+        const form = document.getElementById('festivalForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Enviando...';
+
+            const formData = new FormData(form);
+            const data = {
+                nombre: formData.get('nombre'),
+                asistencia: formData.get('asistencia'),
+                invitados: formData.get('invitados'),
+                menu: formData.get('menu'),
+                traslado: formData.get('traslado'),
+                fecha: new Date().toLocaleString()
+            };
+
+            // Simulación o conexión directa a Google Sheets vía Apps Script
+            setTimeout(() => {
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+            }, 800);
+        });
+    </script>
+</body>
+</html>
