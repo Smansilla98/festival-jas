@@ -1,407 +1,402 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Festival JAS - Sábado 16 de Enero 2027</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        festivalPink: '#ec4899',
+                        festivalHotPink: '#f43f5e',
+                        festivalTurquoise: '#06b6d4',
+                        festivalYellow: '#facc15',
+                        festivalPurple: '#8b5cf6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-pink: #ff2a85;
-            --secondary-cyan: #00f0ff;
-            --accent-yellow: #ffea00;
-            --dark-bg: #12051f;
-            --card-bg: rgba(25, 10, 40, 0.9);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
         body {
-            background-color: var(--dark-bg);
-            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            background-color: #0d0f18;
+            color: #f8fafc;
             overflow-x: hidden;
         }
-
-        header {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            padding: 2rem 1rem;
-            background: linear-gradient(rgba(18, 5, 31, 0.7), rgba(18, 5, 31, 0.9)), #12051f;
+        .hero-bg {
+            background: linear-gradient(rgba(13, 15, 24, 0.4), rgba(13, 15, 24, 0.85)), url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
         }
-
-        .top-badge {
-            background: var(--primary-pink);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
-
-        .hero-content {
-            margin: auto 0;
-            max-width: 800px;
+        .glow-pink {
+            box-shadow: 0 0 35px rgba(236, 72, 153, 0.5);
         }
-
-        h1.main-title {
-            font-size: clamp(3.5rem, 10vw, 7.5rem);
-            color: #fff;
-            text-shadow: 0 0 20px var(--primary-pink), 0 0 40px var(--secondary-cyan);
-            margin: 1rem 0;
-            line-height: 1;
-            font-weight: 900;
+        .glow-turquoise {
+            box-shadow: 0 0 35px rgba(6, 182, 212, 0.5);
         }
-
-        .event-subtitle {
-            font-size: clamp(1.1rem, 3vw, 1.6rem);
-            font-weight: bold;
-            color: var(--accent-yellow);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .text-glow {
+            text-shadow: 0 0 20px rgba(244, 63, 94, 0.7), 0 0 40px rgba(236, 72, 153, 0.5);
         }
-
-        .event-location {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            margin-top: 0.8rem;
-            color: #e0e0e0;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
         }
-
-        .countdown-container {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-            flex-wrap: wrap;
+        .floating-element {
+            animation: float 4s ease-in-out infinite;
         }
-
-        .countdown-box {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid var(--secondary-cyan);
-            padding: 10px 15px;
-            border-radius: 12px;
-            min-width: 75px;
-        }
-
-        .countdown-number {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--secondary-cyan);
-            display: block;
-        }
-
-        .countdown-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: #ddd;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 3rem 1.5rem;
-        }
-
-        section {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            color: var(--secondary-cyan);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .info-card {
-            background: rgba(18, 5, 31, 0.8);
-            border: 1px solid rgba(255, 42, 133, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .info-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-
-        .info-card p {
-            font-size: 0.95rem;
-            color: #ccc;
-            line-height: 1.5;
-        }
-
-        .transfer-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(255,42,133,0.1), rgba(0,240,255,0.1));
-            border-radius: 15px;
-            padding: 2rem;
-            border: 2px dashed var(--secondary-cyan);
-        }
-
-        .alias-display {
-            background: #000;
-            color: var(--accent-yellow);
-            font-size: 1.4rem;
-            font-weight: bold;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            letter-spacing: 2px;
-            border: 1px solid var(--accent-yellow);
-        }
-
-        .copy-btn {
-            background: var(--primary-pink);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .copy-btn:hover {
-            opacity: 0.9;
-        }
-
-        .form-section-intro {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #ddd;
-        }
-
-        .form-container {
-            background: rgba(15, 3, 25, 0.9);
-            border-radius: 12px;
-            padding: 2rem;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: var(--secondary-cyan);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.9rem;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1rem;
-        }
-
-        select.form-control option {
-            background: #1c092d;
-            color: #fff;
-        }
-
-        .submit-btn {
-            background: var(--primary-pink);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            text-transform: uppercase;
-            margin-top: 1rem;
-        }
-
-        .success-message {
-            display: none;
-            background: rgba(0, 255, 128, 0.15);
-            border: 1px solid #00ff80;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            color: #00ff80;
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: #888;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        footer span {
-            color: var(--primary-pink);
-            font-weight: bold;
+        .floating-element-delayed {
+            animation: float 5s ease-in-out 2s infinite;
         }
     </style>
 </head>
-<body>
+<body class="bg-[#0d0f18] text-slate-100 min-h-screen selection:bg-festivalPink selection:text-white">
 
-    <header>
-        <div class="top-badge">¡Edición Verano 2027!</div>
-        
-        <div class="hero-content">
-            <p class="event-subtitle">Sábado 16 de Enero del 2027 • 10 a 22 hs</p>
-            <h1 class="main-title">Festival JAS</h1>
-            <p class="event-location">📍 Quinta La Morena, Guernica</p>
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-festivalPink to-festivalTurquoise flex items-center justify-center font-black text-xl text-white shadow-lg">
+                    J
+                </div>
+                <span class="text-2xl font-black tracking-wider bg-gradient-to-r from-festivalPink via-festivalYellow to-festivalTurquoise bg-clip-text text-transparent">
+                    FESTIVAL JAS
+                </span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8 font-medium">
+                <a href="#inicio" class="hover:text-festivalPink transition-colors">Inicio</a>
+                <a href="#info" class="hover:text-festivalTurquoise transition-colors">El Evento</a>
+                <a href="#asistencia" class="hover:text-festivalPink transition-colors">Asistencia</a>
+                <a href="#traslados" class="hover:text-festivalTurquoise transition-colors">Traslados</a>
+                <a href="#regalos" class="hover:text-festivalYellow transition-colors">Regalos</a>
+            </div>
+            <div>
+                <a href="#asistencia" class="bg-gradient-to-r from-festivalPink to-festivalHotPink text-white font-bold px-6 py-2.5 rounded-full shadow-lg hover:shadow-festivalPink/50 transition-all transform hover:scale-105">
+                    ¡Confirmar!
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="inicio" class="relative min-h-screen hero-bg flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden">
+        <!-- Floating tropical & summer decorations -->
+        <div class="absolute top-28 left-6 sm:left-16 text-5xl floating-element opacity-85 select-none pointer-events-none">
+            🍦
+        </div>
+        <div class="absolute bottom-20 right-6 sm:right-20 text-5xl floating-element-delayed opacity-85 select-none pointer-events-none">
+            🌴
+        </div>
+        <div class="absolute top-40 right-10 sm:right-32 text-4xl floating-element opacity-75 select-none pointer-events-none">
+            🎈
+        </div>
+        <div class="absolute bottom-32 left-10 sm:left-24 text-4xl floating-element-delayed opacity-75 select-none pointer-events-none">
+            🎈
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-festivalPink/30 text-festivalPink font-bold text-sm sm:text-base mb-6 tracking-widest uppercase animate-pulse">
+                <span>✨ VERANO 2027 ✨</span>
+            </div>
+
+            <div class="text-festivalPink font-bold tracking-widest text-lg sm:text-2xl mb-2 uppercase">
+                Sábado 16 de Enero
+            </div>
             
-            <div class="countdown-container">
-                <div class="countdown-box">
-                    <span class="countdown-number" id="days">00</span>
-                    <span class="countdown-label">Días</span>
+            <h1 class="text-5xl sm:text-7xl md:text-8xl font-black tracking-wider uppercase mb-6 text-white text-glow">
+                FESTIVAL <span class="bg-gradient-to-r from-festivalPink via-festivalYellow to-festivalTurquoise bg-clip-text text-transparent">JAS</span>
+            </h1>
+
+            <div class="inline-block px-8 py-3 rounded-2xl bg-gradient-to-r from-festivalPink/80 to-festivalTurquoise/80 backdrop-blur-md text-white font-extrabold text-2xl sm:text-3xl mb-8 shadow-2xl border border-white/20">
+                10 A 22 HS
+            </div>
+
+            <!-- Countdown Timer Container -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto mb-10">
+                <div class="glass-card p-4 rounded-2xl border border-white/10">
+                    <span id="days" class="text-3xl sm:text-4xl font-black text-festivalYellow">00</span>
+                    <p class="text-xs sm:text-sm text-slate-300 uppercase tracking-wider mt-1">Días</p>
                 </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="hours">00</span>
-                    <span class="countdown-label">Horas</span>
+                <div class="glass-card p-4 rounded-2xl border border-white/10">
+                    <span id="hours" class="text-3xl sm:text-4xl font-black text-festivalPink">00</span>
+                    <p class="text-xs sm:text-sm text-slate-300 uppercase tracking-wider mt-1">Horas</p>
                 </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="minutes">00</span>
-                    <span class="countdown-label">Minutos</span>
+                <div class="glass-card p-4 rounded-2xl border border-white/10">
+                    <span id="minutes" class="text-3xl sm:text-4xl font-black text-festivalTurquoise">00</span>
+                    <p class="text-xs sm:text-sm text-slate-300 uppercase tracking-wider mt-1">Minutos</p>
                 </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="seconds">00</span>
-                    <span class="countdown-label">Segundos</span>
+                <div class="glass-card p-4 rounded-2xl border border-white/10">
+                    <span id="seconds" class="text-3xl sm:text-4xl font-black text-festivalPurple">00</span>
+                    <p class="text-xs sm:text-sm text-slate-300 uppercase tracking-wider mt-1">Segundos</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#asistencia" class="w-full sm:w-auto bg-gradient-to-r from-festivalPink to-festivalHotPink hover:from-festivalHotPink hover:to-festivalPink text-white font-extxl font-bold px-8 py-4 rounded-2xl shadow-xl hover:shadow-festivalPink/50 transition-all transform hover:-translate-y-1 text-lg">
+                    <i class="fa-solid fa-clipboard-check mr-2"></i> Confirmar Asistencia
+                </a>
+                <a href="#info" class="w-full sm:w-auto glass-card hover:bg-white/15 text-white font-bold px-8 py-4 rounded-2xl border border-white/20 transition-all text-lg">
+                    <i class="fa-solid fa-circle-info mr-2"></i> Ver Info del Lugar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="info" class="py-20 px-4 relative max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-5xl font-black mb-4 uppercase bg-gradient-to-r from-festivalTurquoise to-festivalPink bg-clip-text text-transparent">
+                El Lugar y Experiencia
+            </h2>
+            <p class="text-slate-300 text-lg">Un día completo de música, amigos, pileta y diversión al aire libre.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1: Location -->
+            <div class="glass-card p-8 rounded-3xl border border-white/10 relative overflow-hidden group hover:border-festivalTurquoise/50 transition-all">
+                <div class="absolute -right-10 -bottom-10 text-9xl opacity-5 group-hover:opacity-10 transition-opacity">
+                    📍
+                </div>
+                <div class="w-14 h-14 rounded-2xl bg-festivalTurquoise/20 flex items-center justify-center text-festivalTurquoise text-2xl mb-6">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Quinta La Morena</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed">Ubicada en <strong class="text-white">Guernica</strong>. Un espacio verde increíble preparado exclusivamente para nuestro festival.</p>
+                <div class="inline-flex items-center text-festivalTurquoise font-semibold gap-2">
+                    <i class="fa-solid fa-map-pin"></i> Guernica, Buenos Aires
+                </div>
+            </div>
+
+            <!-- Card 2: Entry / Gorra -->
+            <div class="glass-card p-8 rounded-3xl border border-white/10 relative overflow-hidden group hover:border-festivalPink/50 transition-all">
+                <div class="absolute -right-10 -bottom-10 text-9xl opacity-5 group-hover:opacity-10 transition-opacity">
+                    🧢
+                </div>
+                <div class="w-14 h-14 rounded-2xl bg-festivalPink/20 flex items-center justify-center text-festivalPink text-2xl mb-6">
+                    <i class="fa-solid fa-hat-cowboy"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Entrada a la Gorra</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed">El evento es con modalidad <strong class="text-white">a la gorra</strong>. Queremos que vengas a disfrutar y colaborar acorde a tu experiencia.</p>
+                <div class="inline-flex items-center text-festivalPink font-semibold gap-2">
+                    <i class="fa-solid fa-gift"></i> Colaboración consciente
+                </div>
+            </div>
+
+            <!-- Card 3: Pileta y Verano -->
+            <div class="glass-card p-8 rounded-3xl border border-white/10 relative overflow-hidden group hover:border-festivalYellow/50 transition-all">
+                <div class="absolute -right-10 -bottom-10 text-9xl opacity-5 group-hover:opacity-10 transition-opacity">
+                    🏊
+                </div>
+                <div class="w-14 h-14 rounded-2xl bg-festivalYellow/20 flex items-center justify-center text-festivalYellow text-2xl mb-6">
+                    <i class="fa-solid fa-water-ladder"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Pileta & Fest</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed">Traete tu traje de baño, protector solar y muchas buena energía para disfrutar de la pileta y la música todo el día.</p>
+                <div class="inline-flex items-center text-festivalYellow font-semibold gap-2">
+                    <i class="fa-solid fa-sun"></i> 12 horas non-stop
                 </div>
             </div>
         </div>
-        <div></div>
-    </header>
+    </section>
 
-    <div class="container">
+    <section id="asistencia" class="py-20 px-4 relative max-w-4xl mx-auto">
+        <div class="glass-card p-8 sm:p-12 rounded-3xl border border-white/20 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-festivalPink/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-festivalTurquoise/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <section>
-            <h2>Detalles del Festival</h2>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3>🏊‍♂️ Pileta & Full Day</h3>
-                    <p>Acceso total a la pileta, música al aire libre y un entorno natural inigualable durante 12 horas.</p>
-                </div>
-                <div class="info-card">
-                    <h3>🚌 Traslado en Micro</h3>
-                    <p>Puntos de salida coordinados desde <strong>Lanús</strong> y <strong>Adrogué</strong> (Horarios a definir).</p>
-                </div>
-                <div class="info-card">
-                    <h3>🥗 Menú Opcional</h3>
-                    <p>Opciones gastronómicas adaptadas para celíacos, vegetarianos y veganos.</p>
-                </div>
+            <div class="text-center mb-10 relative z-10">
+                <span class="text-festivalPink font-bold uppercase tracking-widest text-sm">RSVP 2027</span>
+                <h2 class="text-3xl sm:text-4xl font-black mt-2 mb-3">Confirmá tu Asistencia</h2>
+                <p class="text-slate-300">Completá el formulario para dejarnos saber que venís y organizar los detalles.</p>
             </div>
-        </section>
 
-        <section id="asistencia">
-            <h2>Confirmación de Asistencia</h2>
-            <p class="form-section-intro">Completá el formulario para registrar tus datos. La información se guardará automáticamente en nuestra planilla de Excel.</p>
-            
-            <div class="form-container">
-                <form id="festivalForm">
-                    <div class="form-group">
-                        <label for="nombre">Nombre y Apellido *</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ej. María Gómez" required>
+            <form id="attendanceForm" class="space-y-6 relative z-10" onsubmit="handleFormSubmit(event)">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-slate-200">Nombre y Apellido *</label>
+                        <input type="text" id="fullName" required placeholder="Ej: Julián Alvarez" class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-festivalPink transition-colors">
                     </div>
-
-                    <div class="form-group">
-                        <label for="asistencia">¿Confirmás tu asistencia? *</label>
-                        <select id="asistencia" name="asistencia" class="form-control" required>
-                            <option value="">Seleccioná una opción</option>
-                            <option value="Sí, ¡allá estaré!">Sí, ¡allá estaré!</option>
-                            <option value="No puedo asistir">No puedo asistir</option>
-                        </select>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-slate-200">Cantidad de Invitados (Incluyéndote) *</label>
+                        <input type="number" id="guestCount" min="1" max="10" value="1" required class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-festivalPink transition-colors">
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="invitados">Cantidad de invitados adicionales</label>
-                        <input type="number" id="invitados" name="invitados" class="form-control" min="0" max="5" value="0">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="menu">Menú opcional</label>
-                        <select id="menu" name="menu" class="form-control">
-                            <option value="General">Menú General / Estándar</option>
-                            <option value="Celíaco">Celíaco (Sin TACC)</option>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-slate-200">Menú Opcional (Selección) *</label>
+                        <select id="menuOption" required class="w-full bg-[#1a1d2e] border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-festivalPink transition-colors">
+                            <option value="Clasico">Clásico (General)</option>
+                            <option value="Celiaco">Celíaco (Sin TACC)</option>
                             <option value="Vegetariano">Vegetariano</option>
                             <option value="Vegano">Vegano</option>
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label for="traslado">¿Deseás trasladarte en micro?</label>
-                        <select id="traslado" name="traslado" class="form-control">
-                            <option value="No">No necesito traslado</option>
-                            <option value="Sí - Salida Lanús">Sí - Salida desde Lanús</option>
-                            <option value="Sí - Salida Adrogué">Sí - Salida desde Adrogué</option>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-slate-200">Traslado en Micro *</label>
+                        <select id="busOption" required class="w-full bg-[#1a1d2e] border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-festivalPink transition-colors">
+                            <option value="No necesito">No necesito traslado</option>
+                            <option value="Lanús">Sí, desde Lanús</option>
+                            <option value="Adrogué">Sí, desde Adrogué</option>
                         </select>
                     </div>
+                </div>
 
-                    <button type="submit" class="submit-btn" id="submitBtn">Enviar Confirmación</button>
-                </form>
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-slate-200">Comentarios o restricciones adicionales (Opcional)</label>
+                    <textarea id="comments" rows="3" placeholder="Alergias, aclaraciones..." class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-festivalPink transition-colors"></textarea>
+                </div>
 
-                <div id="successMessage" class="success-message">
-                    ✅ ¡Muchas gracias! Tus datos se registraron correctamente en la planilla. ¡Nos vemos en el Festival JAS!
+                <div class="text-center pt-4">
+                    <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-festivalPink via-festivalHotPink to-festivalTurquoise text-white font-extrabold px-10 py-4 rounded-xl shadow-xl hover:opacity-90 transition-all transform hover:scale-105">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> Enviar Confirmación
+                    </button>
+                </div>
+            </form>
+
+            <!-- Success Alert Modal Box (Custom) -->
+            <div id="successMessage" class="hidden mt-6 p-6 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-center animate-pulse">
+                <div class="text-emerald-400 text-3xl mb-2"><i class="fa-solid fa-circle-check"></i></div>
+                <h3 class="text-xl font-bold text-emerald-200">¡Confirmación registrada con éxito!</h3>
+                <p class="text-slate-300 text-sm mt-1">¡Te esperamos en el Festival JAS! Guardá la fecha.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="traslados" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-festivalTurquoise font-bold uppercase tracking-widest text-sm">Logística & Movilidad</span>
+            <h2 class="text-3xl sm:text-5xl font-black mt-2 mb-4">Traslados en Micro</h2>
+            <p class="text-slate-300 text-lg">Organizamos micros para que vengas cómodo y seguro desde puntos estratégicos de la zona sur.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Lanus Point -->
+            <div class="glass-card p-8 rounded-3xl border border-white/10 relative group hover:border-festivalTurquoise/50 transition-all">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="w-14 h-14 rounded-2xl bg-festivalTurquoise/20 flex items-center justify-center text-festivalTurquoise text-2xl">
+                        <i class="fa-solid fa-bus"></i>
+                    </div>
+                    <span class="px-4 py-1.5 rounded-full bg-festivalTurquoise/20 text-festivalTurquoise font-bold text-xs uppercase tracking-wider">Punto A</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Salida desde Lanús</h3>
+                <p class="text-slate-300 mb-6">Zona céntrica de fácil acceso.</p>
+                <div class="flex items-center text-festivalYellow font-semibold gap-2">
+                    <i class="fa-solid fa-clock"></i> Horarios a definir (Próximamente)
                 </div>
             </div>
-        </section>
 
-        <section>
-            <h2>Colaboración / Entrada a la Gorra</h2>
-            <div class="transfer-box">
-                <p style="margin-bottom: 1rem; color: #ddd;">Si querés colaborar de forma anticipada mediante transferencia o Mercado Pago:</p>
-                <div class="alias-display">festivaljas</div>
-                <button class="copy-btn" onclick="copyAlias()">Copiar Alias</button>
+            <!-- Adrogue Point -->
+            <div class="glass-card p-8 rounded-3xl border border-white/10 relative group hover:border-festivalPink/50 transition-all">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="w-14 h-14 rounded-2xl bg-festivalPink/20 flex items-center justify-center text-festivalPink text-2xl">
+                        <i class="fa-solid fa-bus"></i>
+                    </div>
+                    <span class="px-4 py-1.5 rounded-full bg-festivalPink/20 text-festivalPink font-bold text-xs uppercase tracking-wider">Punto B</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Salida desde Adrogué</h3>
+                <p class="text-slate-300 mb-6">Punto de encuentro coordinado en Adrogué.</p>
+                <div class="flex items-center text-festivalYellow font-semibold gap-2">
+                    <i class="fa-solid fa-clock"></i> Horarios a definir (Próximamente)
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </div>
+    <section id="regalos" class="py-20 px-4 max-w-4xl mx-auto">
+        <div class="glass-card p-8 sm:p-12 rounded-3xl border border-white/20 shadow-2xl relative overflow-hidden text-center">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-festivalYellow/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="w-16 h-16 rounded-2xl bg-festivalYellow/20 flex items-center justify-center text-festivalYellow text-3xl mx-auto mb-6 shadow-lg">
+                <i class="fa-solid fa-gift"></i>
+            </div>
 
-    <footer>
-        <p>Festival JAS 2027 • Quinta La Morena, Guernica</p>
+            <h2 class="text-3xl sm:text-4xl font-black mb-3">Regalos & Transferencias</h2>
+            <p class="text-slate-300 max-w-xl mx-auto mb-8">Si deseás colaborar con el festival o realizar un aporte mediante transferencia, podés utilizar nuestro alias oficial.</p>
+
+            <!-- Alias Card Box -->
+            <div class="bg-black/40 border border-white/10 rounded-2xl p-6 max-w-md mx-auto mb-8">
+                <span class="text-xs uppercase tracking-widest text-slate-400 block mb-1">Alias Oficial</span>
+                <div class="text-2xl sm:text-3xl font-black text-festivalYellow tracking-wider mb-4" id="aliasText">
+                    festivaljas
+                </div>
+                <button onclick="copyAlias()" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 border border-white/20">
+                    <i class="fa-solid fa-copy"></i> <span id="copyBtnText">Copiar Alias al Portapapeles</span>
+                </button>
+            </div>
+
+            <!-- QR Code representation -->
+            <div class="flex flex-col items-center justify-center">
+                <div class="bg-white p-4 rounded-2xl shadow-2xl inline-block mb-3">
+                    <!-- Dynamic SVG QR placeholder representing instant payment transfer -->
+                    <svg class="w-48 h-48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="white"/>
+                        <!-- QR Corner 1 -->
+                        <rect x="10" y="10" width="28" height="28" fill="black"/>
+                        <rect x="15" y="15" width="18" height="18" fill="white"/>
+                        <rect x="19" y="19" width="10" height="10" fill="black"/>
+                        <!-- QR Corner 2 -->
+                        <rect x="62" y="10" width="28" height="28" fill="black"/>
+                        <rect x="67" y="15" width="18" height="18" fill="white"/>
+                        <rect x="71" y="19" width="10" height="10" fill="black"/>
+                        <!-- QR Corner 3 -->
+                        <rect x="10" y="62" width="28" height="28" fill="black"/>
+                        <rect x="15" y="67" width="18" height="18" fill="white"/>
+                        <rect x="19" y="71" width="10" height="10" fill="black"/>
+                        <!-- Random QR blocks simulating data -->
+                        <rect x="45" y="15" width="8" height="8" fill="black"/>
+                        <rect x="42" y="30" width="6" height="12" fill="black"/>
+                        <rect x="65" y="45" width="10" height="6" fill="black"/>
+                        <rect x="15" y="45" width="8" height="8" fill="black"/>
+                        <rect x="80" y="65" width="10" height="15" fill="black"/>
+                        <rect x="45" y="55" width="12" height="12" fill="black"/>
+                        <rect x="65" y="80" width="8" height="8" fill="black"/>
+                        <rect x="45" y="80" width="10" height="10" fill="black"/>
+                        <circle cx="50" cy="50" r="6" fill="#f43f5e"/>
+                    </svg>
+                </div>
+                <span class="text-xs text-slate-400 font-medium">Escaneá con cualquier billetera virtual</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/10 text-center text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center space-y-4">
+            <div class="text-2xl font-black bg-gradient-to-r from-festivalPink via-festivalYellow to-festivalTurquoise bg-clip-text text-transparent">
+                FESTIVAL JAS 2027
+            </div>
+            <p>Sábado 16 de Enero de 10 a 22hs • Quinta La Morena, Guernica</p>
+            <p class="text-xs text-slate-500">Diseñado con espíritu veraniego y festivo.</p>
+        </div>
     </footer>
 
     <script>
+        // Countdown Timer Logic targeting Jan 16, 2027 10:00:00
         const eventDate = new Date('January 16, 2027 10:00:00').getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = eventDate - now;
 
-            if (distance < 0) return;
+            if (distance < 0) {
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+                return;
+            }
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -417,36 +412,52 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        function copyAlias() {
-            navigator.clipboard.writeText('festivaljas');
-            alert('¡Alias copiado al portapapeles: festivaljas!');
+        // Form Submission Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const guestCount = document.getElementById('guestCount').value;
+            const menuOption = document.getElementById('menuOption').value;
+            const busOption = document.getElementById('busOption').value;
+            const comments = document.getElementById('comments').value;
+
+            // Log submission data (simulated backend storage)
+            console.log("Asistencia registrada:", { fullName, guestCount, menuOption, busOption, comments });
+
+            // Show success alert box
+            const successBox = document.getElementById('successMessage');
+            successBox.classList.remove('hidden');
+            successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            // Reset form
+            document.getElementById('attendanceForm').reset();
+
+            // Hide success message after 6 seconds
+            setTimeout(() => {
+                successBox.classList.add('hidden');
+            }, 6000);
         }
 
-        const form = document.getElementById('festivalForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
-
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Enviando...';
-
-            const formData = new FormData(form);
-            const data = {
-                nombre: formData.get('nombre'),
-                asistencia: formData.get('asistencia'),
-                invitados: formData.get('invitados'),
-                menu: formData.get('menu'),
-                traslado: formData.get('traslado'),
-                fecha: new Date().toLocaleString()
-            };
-
-            // Simulación o conexión directa a Google Sheets vía Apps Script
-            setTimeout(() => {
-                form.style.display = 'none';
-                successMessage.style.display = 'block';
-            }, 800);
-        });
+        // Copy Alias to Clipboard using document.execCommand fallback for iframe compatibility
+        function copyAlias() {
+            const aliasText = document.getElementById('aliasText').innerText;
+            const textArea = document.createElement('textarea');
+            textArea.value = aliasText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                const btnText = document.getElementById('copyBtnText');
+                btnText.innerText = "¡Copiado al Portapapeles!";
+                setTimeout(() => {
+                    btnText.innerText = "Copiar Alias al Portapapeles";
+                }, 3000);
+            } catch (err) {
+                console.error('Error al copiar', err);
+            }
+            document.body.removeChild(textArea);
+        }
     </script>
 </body>
 </html>
