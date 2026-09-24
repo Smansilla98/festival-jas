@@ -66,6 +66,7 @@
     </style>
 </head>
 <body class="bg-[#0d0f18] text-slate-100 min-h-screen selection:bg-festivalPink selection:text-white">
+    <iframe name="googleFormResponseFrame" title="Respuesta de Google Forms" class="hidden"></iframe>
 
     <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-white/10 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -80,6 +81,7 @@
             <div class="hidden md:flex items-center space-x-8 font-medium">
                 <a href="#inicio" class="hover:text-festivalPink transition-colors">Inicio</a>
                 <a href="#info" class="hover:text-festivalTurquoise transition-colors">El Evento</a>
+                <a href="#ubicacion" class="hover:text-festivalYellow transition-colors">Ubicación</a>
                 <a href="#asistencia" class="hover:text-festivalPink transition-colors">Asistencia</a>
                 <a href="#traslados" class="hover:text-festivalTurquoise transition-colors">Traslados</a>
                 <a href="#regalos" class="hover:text-festivalYellow transition-colors">Regalos</a>
@@ -211,6 +213,37 @@
         </div>
     </section>
 
+    <section id="ubicacion" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-festivalYellow font-bold uppercase tracking-widest text-sm">Cómo llegar</span>
+            <h2 class="text-3xl sm:text-5xl font-black mt-2 mb-4">Encontrá la Quinta</h2>
+            <p class="text-slate-300 text-lg">Quinta La Morena, Guernica, Buenos Aires. Consultá el mapa y abrí la ubicación en Google Maps para iniciar tu recorrido.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+            <div class="glass-card p-8 rounded-3xl border border-white/10 flex flex-col justify-center">
+                <div class="w-14 h-14 rounded-2xl bg-festivalYellow/20 flex items-center justify-center text-festivalYellow text-2xl mb-6">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Quinta La Morena</h3>
+                <p class="text-slate-300 leading-relaxed mb-6">Guernica, Provincia de Buenos Aires</p>
+                <a href="https://maps.app.goo.gl/zrugbW1HVzYR9TvG7" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-festivalYellow to-festivalHotPink text-slate-950 font-bold px-6 py-3 rounded-xl transition-all hover:scale-105">
+                    <i class="fa-solid fa-route"></i> Abrir en Google Maps
+                </a>
+            </div>
+
+            <div class="lg:col-span-2 overflow-hidden rounded-3xl border border-white/15 shadow-2xl min-h-[320px]">
+                <iframe
+                    src="https://www.google.com/maps?q=Quinta+La+Morena,+Guernica,+Buenos+Aires&output=embed"
+                    title="Mapa de Quinta La Morena en Guernica"
+                    class="w-full h-full min-h-[320px] border-0"
+                    loading="lazy"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
     <section id="asistencia" class="py-20 px-4 relative max-w-4xl mx-auto">
         <div class="glass-card p-8 sm:p-12 rounded-3xl border border-white/20 shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-festivalPink/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -230,7 +263,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-semibold mb-2 text-slate-200">Cantidad de Invitados (Incluyéndote) *</label>
-                        <input type="number" id="guestCount" min="1" max="10" value="1" required class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-festivalPink transition-colors">
+                        <input type="number" id="guestCount" min="1" max="5" value="1" required class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-festivalPink transition-colors">
                     </div>
                 </div>
 
@@ -249,7 +282,7 @@
                         <select id="busOption" required class="w-full bg-[#1a1d2e] border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-festivalPink transition-colors">
                             <option value="No necesito">No necesito traslado</option>
                             <option value="Lanús">Sí, desde Lanús</option>
-                            <option value="Adrogué">Sí, desde Adrogué</option>
+                            <option value="Lomas">Sí, desde Lomas</option>
                         </select>
                     </div>
                 </div>
@@ -306,8 +339,8 @@
                     </div>
                     <span class="px-4 py-1.5 rounded-full bg-festivalPink/20 text-festivalPink font-bold text-xs uppercase tracking-wider">Punto B</span>
                 </div>
-                <h3 class="text-2xl font-bold mb-2">Salida desde Adrogué</h3>
-                <p class="text-slate-300 mb-6">Punto de encuentro coordinado en Adrogué.</p>
+                <h3 class="text-2xl font-bold mb-2">Salida desde Lomas</h3>
+                <p class="text-slate-300 mb-6">Punto de encuentro coordinado en Lomas.</p>
                 <div class="flex items-center text-festivalYellow font-semibold gap-2">
                     <i class="fa-solid fa-clock"></i> Horarios a definir (Próximamente)
                 </div>
@@ -412,30 +445,61 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
+        const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfcZx9GpWEjrH6tUF_1P1AGcxBIJhpT0aOxK6jwJzZa1ox4-Q/formResponse';
+
         // Form Submission Handler
         function handleFormSubmit(event) {
             event.preventDefault();
-            
+
             const fullName = document.getElementById('fullName').value;
             const guestCount = document.getElementById('guestCount').value;
             const menuOption = document.getElementById('menuOption').value;
             const busOption = document.getElementById('busOption').value;
             const comments = document.getElementById('comments').value;
+            const attendanceForm = document.getElementById('attendanceForm');
+            const submitButton = attendanceForm.querySelector('button[type="submit"]');
+            const googleForm = document.createElement('form');
+            googleForm.action = googleFormUrl;
+            googleForm.method = 'POST';
+            googleForm.target = 'googleFormResponseFrame';
+            googleForm.style.display = 'none';
 
-            // Log submission data (simulated backend storage)
-            console.log("Asistencia registrada:", { fullName, guestCount, menuOption, busOption, comments });
+            const fields = {
+                'entry.1633920210': fullName,
+                'entry.227649005': guestCount,
+                'entry.790080973': menuOption,
+                'entry.1898362274': busOption === 'No necesito'
+                    ? 'No Necesito traslado'
+                    : busOption === 'Lanús'
+                        ? 'Si, desde Lanús'
+                        : 'Si, desde Lomas',
+                'entry.182045176': comments
+            };
 
-            // Show success alert box
+            Object.entries(fields).forEach(([name, value]) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = name;
+                input.value = value;
+                googleForm.appendChild(input);
+            });
+
+            document.body.appendChild(googleForm);
+            googleForm.submit();
+            googleForm.remove();
+
+            submitButton.disabled = true;
+            submitButton.classList.add('opacity-60', 'cursor-not-allowed');
+
             const successBox = document.getElementById('successMessage');
             successBox.classList.remove('hidden');
             successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            attendanceForm.reset();
 
-            // Reset form
-            document.getElementById('attendanceForm').reset();
-
-            // Hide success message after 6 seconds
             setTimeout(() => {
                 successBox.classList.add('hidden');
+                submitButton.disabled = false;
+                submitButton.classList.remove('opacity-60', 'cursor-not-allowed');
             }, 6000);
         }
 
