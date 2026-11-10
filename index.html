@@ -69,6 +69,53 @@
         .modal-in {
             animation: modalIn 0.35s ease-out, shake 3s ease-in-out 0.4s infinite;
         }
+        /* Estética "publicidad de apuestas" para el modal de regalos */
+        .casino-border {
+            background: linear-gradient(90deg, #facc15, #22c55e, #facc15, #f43f5e, #facc15);
+            background-size: 300% 100%;
+            animation: casinoBorder 2s linear infinite;
+        }
+        @keyframes casinoBorder {
+            from { background-position: 0% 50%; }
+            to { background-position: 300% 50%; }
+        }
+        .casino-glow {
+            box-shadow: 0 0 40px rgba(250, 204, 21, 0.6), 0 0 90px rgba(34, 197, 94, 0.35);
+        }
+        .neon-gold {
+            color: #fde047;
+            text-shadow: 0 0 8px #facc15, 0 0 20px #f59e0b, 0 0 40px #f59e0b;
+        }
+        .neon-green {
+            color: #4ade80;
+            text-shadow: 0 0 8px #22c55e, 0 0 20px #16a34a;
+        }
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0.25; }
+        }
+        .blink {
+            animation: blink 0.8s steps(1) infinite;
+        }
+        @keyframes pulseBig {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+        .pulse-big {
+            animation: pulseBig 0.9s ease-in-out infinite;
+        }
+        @keyframes coinFall {
+            from { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            to { transform: translateY(520px) rotate(360deg); opacity: 0; }
+        }
+        .coin {
+            position: absolute;
+            top: 0;
+            font-size: 1.6rem;
+            animation: coinFall 3s linear infinite;
+            pointer-events: none;
+        }
         .text-glow {
             text-shadow: 0 0 20px rgba(244, 63, 94, 0.7), 0 0 40px rgba(236, 72, 153, 0.5);
         }
@@ -455,6 +502,64 @@
         </div>
     </div>
 
+    <!-- Modal: regalos estilo publicidad de apuestas -->
+    <div id="giftModal" class="hidden fixed inset-0 z-[60] items-center justify-center p-4 bg-black/80 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="giftModalTitle">
+        <div class="modal-in relative w-full max-w-md rounded-3xl p-[3px] casino-border casino-glow">
+            <div class="rounded-3xl bg-gradient-to-b from-[#0b1a10] via-[#0a0a0a] to-[#1a1405] p-7 text-center relative overflow-hidden">
+                <!-- Lluvia de monedas -->
+                <span class="coin" style="left:8%;animation-delay:0s">🪙</span>
+                <span class="coin" style="left:28%;animation-delay:1.2s">💵</span>
+                <span class="coin" style="left:52%;animation-delay:0.6s">🪙</span>
+                <span class="coin" style="left:74%;animation-delay:1.8s">💸</span>
+                <span class="coin" style="left:90%;animation-delay:0.3s">🪙</span>
+
+                <button type="button" onclick="closeGiftModal()" class="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-400 flex items-center justify-center text-sm" aria-label="Cerrar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="relative z-10">
+                    <div class="inline-block px-4 py-1 rounded-md bg-red-600 text-white font-black text-xs uppercase tracking-widest blink mb-3">
+                        🔥 Bono exclusivo 🔥
+                    </div>
+
+                    <p class="text-4xl mb-1">🎰🎁🎰</p>
+
+                    <h3 id="giftModalTitle" class="text-2xl sm:text-3xl font-black uppercase leading-tight mb-1 text-white">
+                        ¿No sabés qué regalar?
+                    </h3>
+                    <p class="text-4xl sm:text-5xl font-black uppercase neon-gold mb-2 pulse-big">¡Todo suma!</p>
+                    <p class="neon-green font-extrabold uppercase tracking-wide text-sm mb-5">
+                        Multiplicá la felicidad <span class="text-xl">x100</span> 🚀
+                    </p>
+
+                    <div class="rounded-2xl border-2 border-dashed border-yellow-400/80 bg-black/60 p-4 mb-4">
+                        <span class="text-[11px] uppercase tracking-[0.25em] text-yellow-200/80 block mb-1">Depositá al alias</span>
+                        <div id="giftAliasText" class="text-3xl sm:text-4xl font-black neon-gold tracking-wider break-all">festivaljas</div>
+                    </div>
+
+                    <p class="text-xs text-slate-300 mb-4">
+                        ⏳ Oferta válida por <span id="giftCountdown" class="font-black text-red-400">00:59</span> · <span class="text-yellow-300 font-bold">¡Últimos cupos!</span>
+                    </p>
+
+                    <button type="button" onclick="copyGiftAlias()" class="w-full bg-gradient-to-r from-green-500 via-lime-400 to-green-500 text-black font-black text-lg uppercase py-4 rounded-xl shadow-[0_0_25px_rgba(74,222,128,0.7)] pulse-big">
+                        <i class="fa-solid fa-coins mr-2"></i><span id="giftCopyBtnText">¡Copiar alias y regalar!</span>
+                    </button>
+
+                    <button type="button" onclick="markGiftDone()" class="w-full mt-3 text-sm text-slate-400 hover:text-white py-2 transition-colors">
+                        Ya regalé, ¡soy un ganador! 🏆
+                    </button>
+                    <button type="button" onclick="closeGiftModal()" class="w-full text-xs text-slate-500 hover:text-slate-300 py-1 transition-colors">
+                        Más tarde
+                    </button>
+
+                    <p class="mt-3 text-[9px] leading-snug text-slate-500">
+                        *Regalá con responsabilidad. Prohibido no regalar a menores de 1 año (Juli). Sujeto a disponibilidad de felicidad. Los novios se reservan el derecho de agradecer efusivamente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="py-12 border-t border-white/10 text-center text-slate-400 text-sm">
         <div class="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center space-y-4">
             <div class="text-2xl font-black bg-gradient-to-r from-festivalPink via-festivalYellow to-festivalTurquoise bg-clip-text text-transparent">
@@ -576,6 +681,7 @@
         function openRsvpModal() {
             if (isConfirmed() || rsvpShownCount >= RSVP_MAX_PER_VISIT) return;
             if (isFillingForm()) { scheduleRsvpModal(RSVP_REPEAT_DELAY); return; }
+            if (isModalOpen('giftModal')) { scheduleRsvpModal(4000); return; }
             const modal = document.getElementById('rsvpModal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
@@ -611,33 +717,108 @@
             closeRsvpModal();
         }
 
+        function isModalOpen(id) {
+            return !document.getElementById(id).classList.contains('hidden');
+        }
+
         document.getElementById('rsvpModal').addEventListener('click', (e) => {
             if (e.target.id === 'rsvpModal') closeRsvpModal();
         });
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !document.getElementById('rsvpModal').classList.contains('hidden')) closeRsvpModal();
+            if (e.key !== 'Escape') return;
+            if (isModalOpen('rsvpModal')) closeRsvpModal();
+            else if (isModalOpen('giftModal')) closeGiftModal();
         });
 
         if (!isConfirmed()) scheduleRsvpModal(RSVP_FIRST_DELAY);
 
+        // Modal insistente de regalos (estilo publicidad de apuestas)
+        const GIFT_KEY = 'festivalJasRegaloHecho';
+        const GIFT_FIRST_DELAY = 12000;   // primera aparición
+        const GIFT_REPEAT_DELAY = 15000;  // vuelve a aparecer tras cerrarlo
+        let giftTimer = null;
+        let giftCountdownTimer = null;
+
+        function isGiftDone() {
+            return localStorage.getItem(GIFT_KEY) === '1';
+        }
+
+        function scheduleGiftModal(delay) {
+            clearTimeout(giftTimer);
+            giftTimer = setTimeout(openGiftModal, delay);
+        }
+
+        function openGiftModal() {
+            if (isGiftDone()) return;
+            if (isModalOpen('rsvpModal') || isFillingForm()) { scheduleGiftModal(4000); return; }
+            const modal = document.getElementById('giftModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            startGiftCountdown();
+        }
+
+        function hideGiftModal() {
+            const modal = document.getElementById('giftModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            clearInterval(giftCountdownTimer);
+        }
+
+        function closeGiftModal() {
+            hideGiftModal();
+            if (!isGiftDone()) scheduleGiftModal(GIFT_REPEAT_DELAY);
+        }
+
+        function markGiftDone() {
+            localStorage.setItem(GIFT_KEY, '1');
+            clearTimeout(giftTimer);
+            hideGiftModal();
+        }
+
+        // Cuenta regresiva "falsa": al llegar a 0 vuelve a empezar, como toda buena oferta
+        function startGiftCountdown() {
+            let remaining = 59;
+            const el = document.getElementById('giftCountdown');
+            el.innerText = '00:59';
+            clearInterval(giftCountdownTimer);
+            giftCountdownTimer = setInterval(() => {
+                remaining = remaining <= 0 ? 59 : remaining - 1;
+                el.innerText = '00:' + String(remaining).padStart(2, '0');
+            }, 1000);
+        }
+
+        function copyGiftAlias() {
+            copyToClipboard(document.getElementById('giftAliasText').innerText.trim(),
+                document.getElementById('giftCopyBtnText'), '¡Copiar alias y regalar!', '¡Alias copiado! 🤑');
+        }
+
+        document.getElementById('giftModal').addEventListener('click', (e) => {
+            if (e.target.id === 'giftModal') closeGiftModal();
+        });
+
+        if (!isGiftDone()) scheduleGiftModal(GIFT_FIRST_DELAY);
+
         // Copy Alias to Clipboard using document.execCommand fallback for iframe compatibility
-        function copyAlias() {
-            const aliasText = document.getElementById('aliasText').innerText;
+        function copyToClipboard(text, labelEl, originalLabel, copiedLabel) {
             const textArea = document.createElement('textarea');
-            textArea.value = aliasText;
+            textArea.value = text;
             document.body.appendChild(textArea);
             textArea.select();
             try {
                 document.execCommand('copy');
-                const btnText = document.getElementById('copyBtnText');
-                btnText.innerText = "¡Alias copiado!";
+                labelEl.innerText = copiedLabel;
                 setTimeout(() => {
-                    btnText.innerText = "Copiar alias";
+                    labelEl.innerText = originalLabel;
                 }, 3000);
             } catch (err) {
                 console.error('Error al copiar', err);
             }
             document.body.removeChild(textArea);
+        }
+
+        function copyAlias() {
+            copyToClipboard(document.getElementById('aliasText').innerText.trim(),
+                document.getElementById('copyBtnText'), 'Copiar alias', '¡Alias copiado!');
         }
     </script>
 </body>
