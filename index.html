@@ -57,8 +57,17 @@
             from { opacity: 0; transform: translateY(24px) scale(0.95); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
+        /* Temblor de ~0.6s cada 3s */
+        @keyframes shake {
+            0%, 20%, 100% { transform: translateX(0) rotate(0); }
+            3% { transform: translateX(-10px) rotate(-2deg); }
+            6% { transform: translateX(10px) rotate(2deg); }
+            9% { transform: translateX(-8px) rotate(-1deg); }
+            12% { transform: translateX(8px) rotate(1deg); }
+            15% { transform: translateX(-4px); }
+        }
         .modal-in {
-            animation: modalIn 0.35s ease-out;
+            animation: modalIn 0.35s ease-out, shake 3s ease-in-out 0.4s infinite;
         }
         .text-glow {
             text-shadow: 0 0 20px rgba(244, 63, 94, 0.7), 0 0 40px rgba(236, 72, 153, 0.5);
@@ -437,7 +446,7 @@
                     <i class="fa-solid fa-clipboard-check mr-2"></i> Confirmar ahora
                 </button>
                 <button type="button" onclick="markAlreadyConfirmed()" class="w-full mt-3 text-sm text-slate-400 hover:text-white py-2 transition-colors">
-                    Ya confirmé
+                    ¡Ya confirmé, dejame en paz! 🙏
                 </button>
                 <button type="button" onclick="closeRsvpModal()" class="w-full text-xs text-slate-500 hover:text-slate-300 py-1 transition-colors">
                     Más tarde
@@ -549,9 +558,9 @@
 
         // Modal insistente para confirmar asistencia
         const RSVP_KEY = 'festivalJasConfirmado';
-        const RSVP_FIRST_DELAY = 6000;     // primera aparición
-        const RSVP_REPEAT_DELAY = 45000;   // vuelve a aparecer tras "Más tarde"
-        const RSVP_MAX_PER_VISIT = 3;
+        const RSVP_FIRST_DELAY = 2000;     // primera aparición
+        const RSVP_REPEAT_DELAY = 10000;   // vuelve a aparecer tras "Más tarde"
+        const RSVP_MAX_PER_VISIT = Infinity; // sin límite: insiste hasta que confirme
         let rsvpShownCount = 0;
         let rsvpTimer = null;
 
@@ -593,7 +602,7 @@
             document.getElementById('asistencia').scrollIntoView({ behavior: 'smooth' });
             setTimeout(() => document.getElementById('fullName').focus({ preventScroll: true }), 700);
             // Si no termina de confirmar, se lo volvemos a recordar
-            scheduleRsvpModal(RSVP_REPEAT_DELAY * 2);
+            scheduleRsvpModal(RSVP_REPEAT_DELAY * 3);
         }
 
         function markAlreadyConfirmed() {
