@@ -50,6 +50,16 @@
         .glow-turquoise {
             box-shadow: 0 0 35px rgba(6, 182, 212, 0.5);
         }
+        .glow-yellow {
+            box-shadow: 0 0 45px rgba(250, 204, 21, 0.35), 0 0 80px rgba(236, 72, 153, 0.25);
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(24px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-in {
+            animation: modalIn 0.35s ease-out;
+        }
         .text-glow {
             text-shadow: 0 0 20px rgba(244, 63, 94, 0.7), 0 0 40px rgba(236, 72, 153, 0.5);
         }
@@ -83,9 +93,9 @@
                 <a href="#info" class="hover:text-festivalTurquoise transition-colors">El Evento</a>
                 <a href="#ubicacion" class="hover:text-festivalYellow transition-colors">Ubicación</a>
                 <a href="#asistencia" class="hover:text-festivalPink transition-colors">Asistencia</a>
+                <a href="#regalos" class="text-festivalYellow font-bold hover:text-white transition-colors"><i class="fa-solid fa-gift mr-1"></i>Regalos</a>
                 <a href="#traslados" class="hover:text-festivalTurquoise transition-colors">Traslados</a>
                 <a href="#musica" class="hover:text-festivalPink transition-colors">Música</a>
-                <a href="#regalos" class="hover:text-festivalYellow transition-colors">Regalos</a>
             </div>
             <div>
                 <a href="#asistencia" class="bg-gradient-to-r from-festivalPink to-festivalHotPink text-white font-bold px-6 py-2.5 rounded-full shadow-lg hover:shadow-festivalPink/50 transition-all transform hover:scale-105">
@@ -155,6 +165,15 @@
                     <i class="fa-solid fa-circle-info mr-2"></i> Ver Info del Lugar
                 </a>
             </div>
+
+            <a href="#regalos" class="mt-6 inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-black/50 border-2 border-festivalYellow/70 hover:border-festivalYellow hover:scale-105 transition-all">
+                <span class="text-2xl">🎁</span>
+                <span class="text-left leading-tight">
+                    <span class="block text-xs uppercase tracking-widest text-slate-300">Regalos por transferencia</span>
+                    <span class="block text-lg font-black text-festivalYellow">Alias: festivaljas</span>
+                </span>
+                <i class="fa-solid fa-arrow-down text-festivalYellow"></i>
+            </a>
         </div>
     </header>
 
@@ -299,6 +318,40 @@
                 <div class="text-emerald-400 text-3xl mb-2"><i class="fa-solid fa-circle-check"></i></div>
                 <h3 class="text-xl font-bold text-emerald-200">¡Confirmación registrada con éxito!</h3>
                 <p class="text-slate-300 text-sm mt-1">¡Te esperamos en el Festival JAS! Guardá la fecha.</p>
+                <a href="#regalos" class="inline-flex items-center gap-2 mt-3 text-festivalYellow font-bold hover:underline"><i class="fa-solid fa-gift"></i> Ver dónde enviar los regalos</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="regalos" class="py-20 px-4 max-w-4xl mx-auto scroll-mt-24">
+        <div class="relative rounded-3xl p-[2px] bg-gradient-to-r from-festivalYellow via-festivalPink to-festivalTurquoise glow-yellow">
+            <div class="rounded-3xl bg-[#121522] p-8 sm:p-12 relative overflow-hidden text-center">
+                <div class="absolute -top-10 -right-10 w-72 h-72 bg-festivalYellow/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-festivalPink/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute top-6 left-6 text-4xl floating-element select-none pointer-events-none">🎁</div>
+                <div class="absolute bottom-6 right-6 text-4xl floating-element-delayed select-none pointer-events-none">💸</div>
+
+                <div class="relative z-10">
+                    <span class="inline-block px-4 py-1.5 rounded-full bg-festivalYellow text-slate-950 font-black text-xs sm:text-sm uppercase tracking-widest mb-6">
+                        <i class="fa-solid fa-star mr-1"></i> Importante
+                    </span>
+
+                    <h2 class="text-3xl sm:text-5xl font-black mb-4 uppercase">
+                        ¿Dónde enviar los <span class="bg-gradient-to-r from-festivalYellow to-festivalPink bg-clip-text text-transparent">regalos</span>?
+                    </h2>
+                    <p class="text-slate-200 text-lg max-w-xl mx-auto mb-8">
+                        Si querés hacernos un regalo, <strong class="text-white">la mejor forma es por transferencia</strong> a este alias. ¡Gracias por ser parte!
+                    </p>
+
+                    <!-- Alias Card Box -->
+                    <div class="bg-black/50 border-2 border-festivalYellow/60 rounded-2xl p-6 sm:p-8 max-w-md mx-auto">
+                        <span class="text-xs uppercase tracking-widest text-slate-400 block mb-2">Transferí al alias</span>
+                        <div class="text-4xl sm:text-5xl font-black text-festivalYellow tracking-wider mb-6 break-all" id="aliasText">festivaljas</div>
+                        <button onclick="copyAlias()" class="w-full bg-gradient-to-r from-festivalYellow to-festivalHotPink text-slate-950 font-extrabold text-lg py-4 rounded-xl transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fa-solid fa-copy"></i> <span id="copyBtnText">Copiar alias</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -366,30 +419,32 @@
         </div>
     </section>
 
-    <section id="regalos" class="py-20 px-4 max-w-4xl mx-auto">
-        <div class="glass-card p-8 sm:p-12 rounded-3xl border border-white/20 shadow-2xl relative overflow-hidden text-center">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-festivalYellow/10 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div class="w-16 h-16 rounded-2xl bg-festivalYellow/20 flex items-center justify-center text-festivalYellow text-3xl mx-auto mb-6 shadow-lg">
-                <i class="fa-solid fa-gift"></i>
-            </div>
-
-            <h2 class="text-3xl sm:text-4xl font-black mb-3">Regalos & Transferencias</h2>
-            <p class="text-slate-300 max-w-xl mx-auto mb-8">Si deseás colaborar con el festival o realizar un aporte mediante transferencia, podés utilizar nuestro alias oficial.</p>
-
-            <!-- Alias Card Box -->
-            <div class="bg-black/40 border border-white/10 rounded-2xl p-6 max-w-md mx-auto mb-8">
-                <span class="text-xs uppercase tracking-widest text-slate-400 block mb-1">Alias Oficial</span>
-                <div class="text-2xl sm:text-3xl font-black text-festivalYellow tracking-wider mb-4" id="aliasText">
-                    festivaljas
-                </div>
-                <button onclick="copyAlias()" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 border border-white/20">
-                    <i class="fa-solid fa-copy"></i> <span id="copyBtnText">Copiar Alias al Portapapeles</span>
+    <!-- Modal: recordatorio para confirmar asistencia -->
+    <div id="rsvpModal" class="hidden fixed inset-0 z-[60] items-center justify-center p-4 bg-black/70 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="rsvpModalTitle">
+        <div class="modal-in relative w-full max-w-md rounded-3xl p-[2px] bg-gradient-to-br from-festivalPink via-festivalYellow to-festivalTurquoise glow-pink">
+            <div class="rounded-3xl bg-[#121522] p-8 text-center relative overflow-hidden">
+                <button type="button" onclick="closeRsvpModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 flex items-center justify-center" aria-label="Cerrar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="text-6xl mb-4 floating-element inline-block">🎉</div>
+                <h3 id="rsvpModalTitle" class="text-2xl sm:text-3xl font-black uppercase mb-3">
+                    ¿Ya confirmaste <span class="bg-gradient-to-r from-festivalPink to-festivalTurquoise bg-clip-text text-transparent">tu asistencia</span>?
+                </h3>
+                <p class="text-slate-300 mb-6">
+                    Necesitamos saber cuántos somos para organizar comida y micros. ¡Te lleva menos de un minuto!
+                </p>
+                <button type="button" onclick="goToRsvp()" class="w-full bg-gradient-to-r from-festivalPink to-festivalHotPink text-white font-extrabold text-lg py-4 rounded-xl shadow-xl hover:scale-105 transition-all">
+                    <i class="fa-solid fa-clipboard-check mr-2"></i> Confirmar ahora
+                </button>
+                <button type="button" onclick="markAlreadyConfirmed()" class="w-full mt-3 text-sm text-slate-400 hover:text-white py-2 transition-colors">
+                    Ya confirmé
+                </button>
+                <button type="button" onclick="closeRsvpModal()" class="w-full text-xs text-slate-500 hover:text-slate-300 py-1 transition-colors">
+                    Más tarde
                 </button>
             </div>
-
         </div>
-    </section>
+    </div>
 
     <footer class="py-12 border-t border-white/10 text-center text-slate-400 text-sm">
         <div class="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center space-y-4">
@@ -474,6 +529,9 @@
             googleForm.submit();
             googleForm.remove();
 
+            localStorage.setItem(RSVP_KEY, '1');
+            closeRsvpModal();
+
             submitButton.disabled = true;
             submitButton.classList.add('opacity-60', 'cursor-not-allowed');
 
@@ -489,6 +547,70 @@
             }, 6000);
         }
 
+        // Modal insistente para confirmar asistencia
+        const RSVP_KEY = 'festivalJasConfirmado';
+        const RSVP_FIRST_DELAY = 6000;     // primera aparición
+        const RSVP_REPEAT_DELAY = 45000;   // vuelve a aparecer tras "Más tarde"
+        const RSVP_MAX_PER_VISIT = 3;
+        let rsvpShownCount = 0;
+        let rsvpTimer = null;
+
+        function isConfirmed() {
+            return localStorage.getItem(RSVP_KEY) === '1';
+        }
+
+        function isFillingForm() {
+            const form = document.getElementById('attendanceForm');
+            return form.contains(document.activeElement);
+        }
+
+        function openRsvpModal() {
+            if (isConfirmed() || rsvpShownCount >= RSVP_MAX_PER_VISIT) return;
+            if (isFillingForm()) { scheduleRsvpModal(RSVP_REPEAT_DELAY); return; }
+            const modal = document.getElementById('rsvpModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            rsvpShownCount++;
+        }
+
+        function closeRsvpModal() {
+            const modal = document.getElementById('rsvpModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            if (!isConfirmed()) scheduleRsvpModal(RSVP_REPEAT_DELAY);
+        }
+
+        function scheduleRsvpModal(delay) {
+            clearTimeout(rsvpTimer);
+            rsvpTimer = setTimeout(openRsvpModal, delay);
+        }
+
+        function goToRsvp() {
+            const modal = document.getElementById('rsvpModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            clearTimeout(rsvpTimer);
+            document.getElementById('asistencia').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => document.getElementById('fullName').focus({ preventScroll: true }), 700);
+            // Si no termina de confirmar, se lo volvemos a recordar
+            scheduleRsvpModal(RSVP_REPEAT_DELAY * 2);
+        }
+
+        function markAlreadyConfirmed() {
+            localStorage.setItem(RSVP_KEY, '1');
+            clearTimeout(rsvpTimer);
+            closeRsvpModal();
+        }
+
+        document.getElementById('rsvpModal').addEventListener('click', (e) => {
+            if (e.target.id === 'rsvpModal') closeRsvpModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('rsvpModal').classList.contains('hidden')) closeRsvpModal();
+        });
+
+        if (!isConfirmed()) scheduleRsvpModal(RSVP_FIRST_DELAY);
+
         // Copy Alias to Clipboard using document.execCommand fallback for iframe compatibility
         function copyAlias() {
             const aliasText = document.getElementById('aliasText').innerText;
@@ -499,9 +621,9 @@
             try {
                 document.execCommand('copy');
                 const btnText = document.getElementById('copyBtnText');
-                btnText.innerText = "¡Copiado al Portapapeles!";
+                btnText.innerText = "¡Alias copiado!";
                 setTimeout(() => {
-                    btnText.innerText = "Copiar Alias al Portapapeles";
+                    btnText.innerText = "Copiar alias";
                 }, 3000);
             } catch (err) {
                 console.error('Error al copiar', err);
